@@ -57,9 +57,11 @@ public class ServerB implements ServerBInterface, Runnable {
             // Se registra el servidor dentro del broker
             brokerInterface.registrar_servidor(ipRegistro, nombre_registro);
             // Se registran los servicios dentro del broker
-            brokerInterface.registrar_servicio(nombre_registro, "listar_libros", new String[0], "String []");
+            brokerInterface.registrar_servicio(nombre_registro, "listar_libros", new String[0],
+                    "String []");
             String[] parametros = {"String libro"};
-            brokerInterface.registrar_servicio(nombre_registro, "insertar_libro", parametros, "void");
+            brokerInterface.registrar_servicio(nombre_registro, "insertar_libro", parametros,
+                    "void");
 
         } catch (RemoteException e) {
             e.printStackTrace();

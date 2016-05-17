@@ -28,8 +28,8 @@ public class Broker implements BrokerInterface, Runnable {
     /**
      *
      */
-    public void ejecuta(String server, String[] args) {
-        ;
+    public String ejecutar_servicio(String nom_servicio, String[] parametros_servicio) {
+        return "";
     }
 
     /**
@@ -43,7 +43,8 @@ public class Broker implements BrokerInterface, Runnable {
     /**
      *
      */
-    public void registrar_servicio(String nombre_regitrado, String nom_servicio, String[] lista_param, String tipo_retorno) {
+    public void registrar_servicio(String nombre_regitrado, String nom_servicio, String[]
+            lista_param, String tipo_retorno) {
         for (Servidor servidor : servidores) {
             if (servidor.getNombre().equals(nombre_regitrado)) {
                 servidor.addServicio(nom_servicio, lista_param, tipo_retorno);
