@@ -12,6 +12,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class ServerA implements ServerAInterface, Runnable {
 
     private String ipRegistro; //IP del host del registro RMI
@@ -28,14 +32,18 @@ public class ServerA implements ServerAInterface, Runnable {
      *
      */
     public String dar_hora() {
-        return "";
+        DateFormat dateF = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
+		return dateF.format(date);
     }
 
     /**
      *
      */
     public String dar_fecha() {
-        return "";
+        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		return dateF.format(date);
     }
 
     public void run() {
