@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Broker implements BrokerInterface, Runnable {
 
@@ -55,8 +56,16 @@ public class Broker implements BrokerInterface, Runnable {
     /**
      *
      */
-    public void listar_servicios(String noseque) {
-
+    public ArrayList<String> listar_servicios(String noseque) {
+        ArrayList<String> listado = new ArrayList<String>();
+        Iterator<Servidor> iterServer= servidores.iterator();
+        while (iterServer.hasNext()) {
+            Iterator<Servicio> iterServicio = iterServer.next().getServicios().iterator();
+            while (iterServicio.hasNext()) {
+                listado.add(iterServicio.hasNext().toString());
+            }
+        }
+        return listado;
     }
 
     public void run() {

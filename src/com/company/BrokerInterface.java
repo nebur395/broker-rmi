@@ -7,6 +7,7 @@ package com.company;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface BrokerInterface extends Remote {
 
@@ -23,6 +24,6 @@ public interface BrokerInterface extends Remote {
                             String tipo_retorno) throws RemoteException;
 
     //
-    void listar_servicios(String noseque) throws RemoteException;
+    ArrayList<String> listar_servicios(String noseque) throws RemoteException;
 
 }
