@@ -2,7 +2,7 @@ package com.company;
 
 /*
  * AUTORES: Rubén Moreno Jimeno 680882 e Iñigo Gascón Royo 685215
- * FICHERO: ServerA.java
+ * FICHERO: ServerB.java
  * DESCRIPCIÓN:
  */
 import java.rmi.AlreadyBoundException;
@@ -11,31 +11,29 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class ServerA implements ServerAInterface, Runnable {
+public class ServerB implements ServerBInterface, Runnable {
 
     private String ipRegistro; //IP del host del registro RMI
 
     /**
      *	Metodo constructor de la clase que asigna la IP de registro
      */
-    public ServerA(String ipRegistro) {
+    public ServerB(String ipRegistro) {
         this.ipRegistro = ipRegistro;
     }
 
     /**
      *
      */
-    public String dar_hora() {
-        return "";
+    public String [] listar_libros() {
+        return null;
     }
 
     /**
      *
      */
-    public String dar_fecha() {
-        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		return dateF.format(date);
+    public void insertar_libro(String libro) {
+
     }
 
     public void run() {
@@ -44,7 +42,7 @@ public class ServerA implements ServerAInterface, Runnable {
             ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(this, 0);
             Registry registry = LocateRegistry.getRegistry(ipRegistro);
 
-            registry.bind("ServerAInterface", stub);
+            registry.bind("ServerBInterface", stub);
 
 
         } catch (RemoteException e) {
