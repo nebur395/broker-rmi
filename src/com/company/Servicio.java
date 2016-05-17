@@ -4,6 +4,8 @@ package com.company;
  * FICHERO: Servicio.java
  * DESCRIPCIÓN:
  */
+ 
+ import java.util.Arrays;
 
 public class Servicio {
 	
@@ -29,5 +31,8 @@ public class Servicio {
 		return lista_param;
 	}
 	
-	
+	public String toString(){
+		String parametros = Arrays.toString(lista_param);
+		return tipo_retorno + " " + nom_servicio + "(" + parametros + ")";
+	}
 }
