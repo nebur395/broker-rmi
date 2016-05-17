@@ -15,3 +15,6 @@ jrebel.lic
 
 #Temporal files
 *~
+
+#Compiled files
+*.class
