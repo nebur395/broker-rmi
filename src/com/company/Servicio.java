@@ -28,4 +28,6 @@ public class Servicio {
 	public String[] getListaParam(){
 		return lista_param;
 	}
+	
+	
 }

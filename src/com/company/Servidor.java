@@ -30,7 +30,7 @@ public class Servidor {
 		return listaServicios;
 	}
 	
-	public void addServicios(String nombre, String[] param, String retorno){
+	public void addServicio(String nombre, String[] param, String retorno){
 		listaServicios.add(new Servicio(nombre, retorno, param));
 	}
 }
