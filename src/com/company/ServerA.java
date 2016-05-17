@@ -33,7 +33,9 @@ public class ServerA implements ServerAInterface, Runnable {
      *
      */
     public String dar_fecha() {
-        return "";
+        DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		return dateF.format(date);
     }
 
     public void run() {
