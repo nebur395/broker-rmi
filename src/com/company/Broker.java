@@ -62,7 +62,7 @@ public class Broker implements BrokerInterface, Runnable {
         while (iterServer.hasNext()) {
             Iterator<Servicio> iterServicio = iterServer.next().getServicios().iterator();
             while (iterServicio.hasNext()) {
-                listado.add(iterServicio.hasNext().toString());
+                listado.add(iterServicio.next().toString());
             }
         }
         return listado;
