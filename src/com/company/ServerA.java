@@ -59,7 +59,7 @@ public class ServerA implements ServerAInterface, Runnable {
             BrokerInterface brokerInterface = (BrokerInterface) registry.lookup("BrokerInterface");
             // Se registra el servidor dentro del broker
             brokerInterface.registrar_servidor(ipRegistro,nombre_registro);
-            // String nombre_regitrado, String nom_servicio, String [] lista_param, String tipo_retorno
+            // Se registran los servicios dentro del broker
             brokerInterface.registrar_servicio(nombre_registro, "dar_hora",new String[0],"String");
             brokerInterface.registrar_servicio(nombre_registro, "dar_fecha",new String[0],"String");
 
