@@ -12,9 +12,9 @@ public interface BrokerInterface extends Remote {
     //
     void ejecuta(String server, String [] args) throws RemoteException;
     //
-    void registraServer(String noseque) throws RemoteException;
+    void registrar_servidor(String host_remoto_IP_port, String nombre_registrado) throws RemoteException;
     //
-    void registraServicio(String noseque) throws RemoteException;
+    void registrar_servicio(String nombre_regitrado, String nom_servicio, String [] lista_param, String tipo_retorno) throws RemoteException;
     //
     void listar_servicios(String noseque) throws RemoteException;
 

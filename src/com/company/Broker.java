@@ -32,13 +32,13 @@ public class Broker implements BrokerInterface, Runnable {
     /**
      *
      */
-    public void registraServer(String noseque) {
+    public void registrar_servidor(String host_remoto_IP_port, String nombre_registrado) {
 
     }
     /**
      *
      */
-    public void registraServicio(String noseque) {
+    public void registrar_servicio(String nombre_regitrado, String nom_servicio, String [] lista_param, String tipo_retorno) {
 
     }
     /**
