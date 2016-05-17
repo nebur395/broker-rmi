@@ -5,6 +5,7 @@ package com.company;
  * FICHERO: ServerB.java
  * DESCRIPCIÓN:
  */
+
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -20,7 +21,7 @@ public class ServerB implements ServerBInterface, Runnable {
     private final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
     /**
-     *	Metodo constructor de la clase que asigna la IP de registro
+     * Metodo constructor de la clase que asigna la IP de registro
      */
     public ServerB(String ipRegistro) {
         this.ipRegistro = ipRegistro;
@@ -29,8 +30,8 @@ public class ServerB implements ServerBInterface, Runnable {
     /**
      *
      */
-    public String [] listar_libros() {
-		String [] array = new String [listaLibros.size()];
+    public String[] listar_libros() {
+        String[] array = new String[listaLibros.size()];
         return listaLibros.toArray(array);
     }
 
@@ -38,7 +39,7 @@ public class ServerB implements ServerBInterface, Runnable {
      *
      */
     public void insertar_libro(String libro) {
-		listaLibros.add(libro);
+        listaLibros.add(libro);
 
     }
 
@@ -54,11 +55,13 @@ public class ServerB implements ServerBInterface, Runnable {
             registry = LocateRegistry.getRegistry(ipBroker);
             BrokerInterface brokerInterface = (BrokerInterface) registry.lookup("BrokerInterface");
             // Se registra el servidor dentro del broker
-            brokerInterface.registrar_servidor(ipRegistro,nombre_registro);
+            brokerInterface.registrar_servidor(ipRegistro, nombre_registro);
             // Se registran los servicios dentro del broker
-            brokerInterface.registrar_servicio(nombre_registro, "listar_libros",new String[0],"String []");
-            String [] parametros = {"String libro"};
-            brokerInterface.registrar_servicio(nombre_registro, "insertar_libro",parametros,"void");
+            brokerInterface.registrar_servicio(nombre_registro, "listar_libros", new String[0],
+                    "String []");
+            String[] parametros = {"String libro"};
+            brokerInterface.registrar_servicio(nombre_registro, "insertar_libro", parametros,
+                    "void");
 
         } catch (RemoteException e) {
             e.printStackTrace();
