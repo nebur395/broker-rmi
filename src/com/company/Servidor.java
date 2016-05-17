@@ -22,9 +22,15 @@ public class Servidor {
         return nombre_registrado;
     }
 
-    public String getHost() {
-        return host_remoto_IP_port;
+    public String getIP() {
+		int index = host_remoto_IP_port.indexOf(":");
+        return host_remoto_IP_port.substring(0, index);
     }
+    
+    public String getPort() {
+		int index = host_remoto_IP_port.indexOf(":");
+		return host_remoto_IP_port.substring(index+1);
+	}
 
     public ArrayList<Servicio> getServicios() {
         return listaServicios;
