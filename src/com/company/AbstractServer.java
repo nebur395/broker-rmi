@@ -10,9 +10,9 @@ import java.lang.reflect.Method;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public abstract class AbstractServer implements Remote{
+public abstract class AbstractServer implements ServerInterface{
 	
-	protected String ejecuta_metodo(String servicio, String [] tipoParametros, String retorno, String [] parametros) throws RemoteException{
+	public String ejecuta_metodo(String servicio, String [] tipoParametros, String retorno, String [] parametros) {
 		Class c = this.getClass();
 		try{
 			Method method = c.getMethod(servicio, getClassArray(tipoParametros));

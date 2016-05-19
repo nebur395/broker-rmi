@@ -15,7 +15,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class ServerB extends AbstractServer {
-
+	
+	public static final int port = 1099;
     private static String ipRegistro = ""; //IP del host del registro RMI
     private ArrayList<String> listaLibros = new ArrayList<String>();
     private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
@@ -46,23 +47,31 @@ public class ServerB extends AbstractServer {
     public static void main (String [] args) {
         try {
             //Se crea un stub y posteriormente se introduce al registro
-            AbstractServer stub = (AbstractServer) UnicastRemoteObject.exportObject(new
+            ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(new
                     ServerB(args[0]), 0);
-            Registry registry = LocateRegistry.getRegistry(ipRegistro);
+            Registry registry = null;       
+			try{
+				registry = LocateRegistry.createRegistry(port);
+			}
+			catch(RemoteException e){
+				registry = LocateRegistry.getRegistry(port); 
+			}
             String nombre_registro = "ServerBInterface";
             registry.bind(nombre_registro, stub);
-
+			System.err.println("ServerB registrado en registro RMI");
             // Se coge el objeto remoto del broker
             registry = LocateRegistry.getRegistry(ipBroker);
             BrokerInterface brokerInterface = (BrokerInterface) registry.lookup("BrokerInterface");
             // Se registra el servidor dentro del broker
             brokerInterface.registrar_servidor(ipRegistro, nombre_registro);
+            System.err.println("ServerB registrado en Broker");
             // Se registran los servicios dentro del broker
             brokerInterface.registrar_servicio(nombre_registro, "listar_libros", new String[0],
                     "String []");
             String[] parametros = {"String libro"};
             brokerInterface.registrar_servicio(nombre_registro, "insertar_libro", parametros,
                     "void");
+            System.err.println("Servicios de ServerB registrados en Broker");        
 
         } catch (RemoteException e) {
             e.printStackTrace();

@@ -35,7 +35,7 @@ public class ClienteC {
             System.out.println(iterServ + ". Finalizar programa");
             Scanner teclado = new Scanner(System.in);
             boolean parar = false;
-            while (!parar) {
+            while (!parar & teclado.hasNextInt()) {
                 int opcionEscogida = teclado.nextInt();
                 String servicioEscogido = lista_servicios.get(opcionEscogida - 1);
                 if (opcionEscogida == 5) {
@@ -51,7 +51,8 @@ public class ClienteC {
                         int i2 = servicioEscogido.indexOf("(");
                         String servicio = servicioEscogido.substring(i, i2);
                         System.out.println("LOG1: " + servicio);
-                        brokerInterface.ejecutar_servicio(servicio,new String[0]);
+                        String respuesta = brokerInterface.ejecutar_servicio(servicio,new String[0]);
+                        System.out.println(respuesta);
                     }
                 }
             }

@@ -16,15 +16,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Broker implements BrokerInterface {
-
-    private static String ipRegistro; //IP del host del registro RMI
+	public static final int port = 1099;
     ArrayList<Servidor> servidores = new ArrayList<Servidor>();
 
     /**
      * Metodo constructor de la clase que asigna la IP de registro
      */
-    public Broker(String ipRegistro) {
-        this.ipRegistro = ipRegistro;
+    public Broker() {
     }
 
     /**
@@ -106,9 +104,14 @@ public class Broker implements BrokerInterface {
         try {
 		            //Se crea un stub y posteriormente se introduce al registro
             BrokerInterface stub = (BrokerInterface) UnicastRemoteObject.exportObject(new
-                    Broker(args[0]), 0);
-            //Registry registry = LocateRegistry.getRegistry(ipRegistro);
-            Registry registry = LocateRegistry.createRegistry(1099);
+                    Broker(), 0);
+            Registry registry = null;       
+			try{
+				registry = LocateRegistry.createRegistry(port);
+			}
+			catch(RemoteException e){
+				registry = LocateRegistry.getRegistry(port); 
+			}
 
             registry.bind("BrokerInterface", stub);
 			System.err.println("Broker registrado");
