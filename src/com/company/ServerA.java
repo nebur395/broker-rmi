@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 public class ServerA extends AbstractServer {
 
     private static String ipRegistro; //IP del host del registro RMI
-    private final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
+    private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
     /**
      *	Metodo constructor de la clase que asigna la IP de registro
@@ -50,7 +50,7 @@ public class ServerA extends AbstractServer {
         try {
             //Se crea un stub y posteriormente se introduce al registro
             ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(new
-                    ServerA(ipRegistro), 0);
+                    ServerA(args[0]), 0);
             Registry registry = LocateRegistry.getRegistry(ipRegistro);
             String nombre_registro = "ServerAInterface";
             registry.bind(nombre_registro, stub);

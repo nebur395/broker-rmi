@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class ClienteC {
 
-    private final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
+    private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
     public static void main(String[] args) {
         try {
@@ -50,7 +50,7 @@ public class ClienteC {
                         int i = servicioEscogido.indexOf(" ");
                         int i2 = servicioEscogido.indexOf("(");
                         String servicio = servicioEscogido.substring(i, i2);
-                        System.out.println(servicio);
+                        System.out.println("LOG1: " + servicio);
                         brokerInterface.ejecutar_servicio(servicio,new String[0]);
                     }
                 }
