@@ -8,7 +8,7 @@ package com.company;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface ServerAInterface extends Remote {
+public interface ServerAInterface extends AbstractServer {
 
     //
     String dar_fecha() throws RemoteException;

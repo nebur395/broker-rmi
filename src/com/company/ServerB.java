@@ -14,7 +14,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class ServerB implements ServerBInterface, Runnable {
+public class ServerB extends AbstractServer implements Runnable {
 
     private String ipRegistro; //IP del host del registro RMI
     private ArrayList<String> listaLibros = new ArrayList<String>();

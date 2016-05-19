@@ -16,7 +16,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class ServerA implements ServerAInterface, Runnable {
+public class ServerA extends AbstractServer implements Runnable {
 
     private String ipRegistro; //IP del host del registro RMI
     private final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
