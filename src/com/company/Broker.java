@@ -90,7 +90,7 @@ public class Broker implements BrokerInterface {
     /**
      *
      */
-    public ArrayList<String> listar_servicios(String noseque) {
+    public ArrayList<String> listar_servicios() {
         ArrayList<String> listado = new ArrayList<String>();
         Iterator<Servidor> iterServer = servidores.iterator();
         while (iterServer.hasNext()) {

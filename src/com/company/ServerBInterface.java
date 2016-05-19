@@ -8,7 +8,7 @@ package com.company;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface ServerBInterface extends AbstractServer {
+public interface ServerBInterface extends Remote {
 
     //
     String[] listar_libros() throws RemoteException;

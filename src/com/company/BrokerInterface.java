@@ -24,6 +24,6 @@ public interface BrokerInterface extends Remote {
                             String tipo_retorno) throws RemoteException;
 
     //
-    ArrayList<String> listar_servicios(String noseque) throws RemoteException;
+    ArrayList<String> listar_servicios() throws RemoteException;
 
 }
