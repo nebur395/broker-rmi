@@ -104,13 +104,14 @@ public class Broker implements BrokerInterface {
 
     public static void main (String [] args) {
         try {
-            //Se crea un stub y posteriormente se introduce al registro
+		            //Se crea un stub y posteriormente se introduce al registro
             BrokerInterface stub = (BrokerInterface) UnicastRemoteObject.exportObject(new
                     Broker(args[0]), 0);
-            Registry registry = LocateRegistry.getRegistry(ipRegistro);
+            //Registry registry = LocateRegistry.getRegistry(ipRegistro);
+            Registry registry = LocateRegistry.createRegistry(1099);
 
             registry.bind("BrokerInterface", stub);
-
+			System.err.println("Broker registrado");
 
         } catch (RemoteException e) {
             e.printStackTrace();

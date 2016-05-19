@@ -46,7 +46,7 @@ public class ServerB extends AbstractServer {
     public static void main (String [] args) {
         try {
             //Se crea un stub y posteriormente se introduce al registro
-            ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(new
+            AbstractServer stub = (AbstractServer) UnicastRemoteObject.exportObject(new
                     ServerB(args[0]), 0);
             Registry registry = LocateRegistry.getRegistry(ipRegistro);
             String nombre_registro = "ServerBInterface";
