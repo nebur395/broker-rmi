@@ -54,9 +54,6 @@ public class ClienteC {
                         String servicio = servicioEscogido.substring(i+1, i2);
                         System.out.println("LOG1: " + servicio);
                         String respuesta = brokerInterface.ejecutar_servicio(servicio,new String[0]);
-                        if(respuesta.equals("")){
-							System.out.println("Pues se ve que es vacío");
-						}
                         System.out.println(respuesta);
                     }
                 }
