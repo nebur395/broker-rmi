@@ -5,6 +5,7 @@ package com.company;
  * DESCRIPCIÓN:
  */
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -12,23 +13,42 @@ import java.rmi.RemoteException;
 public abstract class AbstractServer implements Remote{
 	
 	protected String ejecuta_metodo(String servicio, String [] tipoParametros, String retorno, String [] parametros) throws RemoteException{
-		Method method = this.getMethod(servicio, getClassArray(tipoParametros));
-		if(retorno.equals("void")){
-			method.invoke(this, parametros);
-			return "";
+		Class c = this.getClass();
+		try{
+			Method method = c.getMethod(servicio, getClassArray(tipoParametros));
+			if(retorno.equals("void")){
+				method.invoke(this, parametros);
+				return "";
+			}
+			else if(retorno.equals("String []")){
+				return (method.invoke(this, parametros)).toString();
+			}
+			else{
+				return (String)method.invoke(this, parametros);
+			}
 		}
-		else if(retorno.equals("String []")){
-			return (method.invoke(this, parametros)).toString();
+		catch (NoSuchMethodException e){
+			e.printStackTrace();
 		}
-		else{
-			return method.invoke(this, parametros);
+		catch (IllegalAccessException e){
+			e.printStackTrace();
 		}
+		catch (InvocationTargetException e){
+			e.printStackTrace();
+		}
+		return"";
 	}
 	
 	protected Class[] getClassArray(String [] param){
 		Class [] array = new Class[param.length];
-		for(int i=0;param.length;i++){
-			array[i] = Class.forName(param[i].substring(0, indexOf(" ")));
+		try{
+			for(int i=0;param.length<i;i++){
+				int index = param[i].indexOf(" ");
+				array[i] = Class.forName(param[i].substring(0, index));
+			}
+		}
+		catch (ClassNotFoundException e){
+			e.printStackTrace();
 		}
 		return array;
 	}
