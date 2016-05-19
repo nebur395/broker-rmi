@@ -14,9 +14,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class ServerB implements ServerBInterface, Runnable {
+public class ServerB implements ServerBInterface {
 
-    private String ipRegistro; //IP del host del registro RMI
+    private static String ipRegistro = ""; //IP del host del registro RMI
     private ArrayList<String> listaLibros = new ArrayList<String>();
     private final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
@@ -43,10 +43,11 @@ public class ServerB implements ServerBInterface, Runnable {
 
     }
 
-    public void run() {
+    public static void main (String [] args) {
         try {
             //Se crea un stub y posteriormente se introduce al registro
-            ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(this, 0);
+            ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(new
+                    ServerB(ipRegistro), 0);
             Registry registry = LocateRegistry.getRegistry(ipRegistro);
             String nombre_registro = "ServerBInterface";
             registry.bind(nombre_registro, stub);

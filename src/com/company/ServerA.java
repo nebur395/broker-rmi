@@ -16,9 +16,9 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class ServerA implements ServerAInterface, Runnable {
+public class ServerA implements ServerAInterface {
 
-    private String ipRegistro; //IP del host del registro RMI
+    private static String ipRegistro; //IP del host del registro RMI
     private final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
     /**
@@ -46,10 +46,11 @@ public class ServerA implements ServerAInterface, Runnable {
 		return dateF.format(date);
     }
 
-    public void run() {
+    public static void main (String [] args) {
         try {
             //Se crea un stub y posteriormente se introduce al registro
-            ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(this, 0);
+            ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(new
+                    ServerA(ipRegistro), 0);
             Registry registry = LocateRegistry.getRegistry(ipRegistro);
             String nombre_registro = "ServerAInterface";
             registry.bind(nombre_registro, stub);

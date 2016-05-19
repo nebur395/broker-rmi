@@ -15,9 +15,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Broker implements BrokerInterface, Runnable {
+public class Broker implements BrokerInterface {
 
-    private String ipRegistro; //IP del host del registro RMI
+    private static String ipRegistro; //IP del host del registro RMI
     ArrayList<Servidor> servidores = new ArrayList<Servidor>();
 
     /**
@@ -34,13 +34,19 @@ public class Broker implements BrokerInterface, Runnable {
         boolean encontrado = false;
         Iterator<Servidor> iterServidor = servidores.iterator();
         Servidor servidor = null;
+        String tipo_retorno = "";
+        String[] lista_param = null;
         // Se itera en la lista de servidores con sus servicios, hasta encontrar el servicio
         // [nom_servicio] y dejar en la variable [servidor] el servidor que contiene dicho servicio
         while (iterServidor.hasNext() && !encontrado) {
             servidor = iterServidor.next();
             Iterator<Servicio> servicio = servidor.getServicios().iterator();
             while (servicio.hasNext() && !encontrado) {
-                if (servicio.next().getNombre().equals(nom_servicio)) {
+                Servicio iterServ = servicio.next();
+                tipo_retorno = iterServ.getTipoRetorno();
+                lista_param = iterServ.getListaParam();
+
+                if (iterServ.getNombre().equals(nom_servicio)) {
                     encontrado = true;
                 }
             }
@@ -49,16 +55,8 @@ public class Broker implements BrokerInterface, Runnable {
             try {
                 // Se coge el objeto remoto del broker
                 Registry registry = LocateRegistry.getRegistry(servidor.getIP());
-                switch (servidor.getNombre()) {
-                    case "ServerAInterface":
-                        ServerAInterface server = (ServerAInterface) registry.lookup(servidor
-                                .getNombre());
-                        break;
-                    default:
-                        ServerBInterface server = (ServerBInterface) registry.lookup(servidor
-                                .getNombre());
-                }
-
+                AbstractServer server = (AbstractServer) registry.lookup(servidor.getNombre());
+                server.ejecuta_metodo(nom_servicio,lista_param,tipo_retorno,parametros_servicio);
 
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -104,7 +102,7 @@ public class Broker implements BrokerInterface, Runnable {
         return listado;
     }
 
-    public void run() {
+    public static void main (String [] args) {
         try {
             //Se crea un stub y posteriormente se introduce al registro
             ServerAInterface stub = (ServerAInterface) UnicastRemoteObject.exportObject(this, 0);
