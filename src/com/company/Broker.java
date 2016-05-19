@@ -53,9 +53,9 @@ public class Broker implements BrokerInterface {
             try {
                 // Se coge el objeto remoto del broker
                 Registry registry = LocateRegistry.getRegistry(servidor.getIP());
-                AbstractServer server = (AbstractServer) registry.lookup(servidor.getNombre());
-                server.ejecuta_metodo(nom_servicio,lista_param,tipo_retorno,parametros_servicio);
-
+                ServerInterface server = (ServerInterface) registry.lookup(servidor.getNombre());
+                return server.ejecuta_metodo(nom_servicio,lista_param,tipo_retorno,parametros_servicio);
+                
             } catch (RemoteException e) {
                 e.printStackTrace();
             } catch (NotBoundException e) {

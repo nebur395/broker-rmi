@@ -41,7 +41,7 @@ public class ServerB extends AbstractServer {
      */
     public void insertar_libro(String libro) {
         listaLibros.add(libro);
-
+        System.out.printf("Libro '%s' introducido%n", libro);
     }
 
     public static void main (String [] args) {
@@ -67,7 +67,7 @@ public class ServerB extends AbstractServer {
             System.err.println("ServerB registrado en Broker");
             // Se registran los servicios dentro del broker
             brokerInterface.registrar_servicio(nombre_registro, "listar_libros", new String[0],
-                    "String []");
+                    "String[]");
             String[] parametros = {"String libro"};
             brokerInterface.registrar_servicio(nombre_registro, "insertar_libro", parametros,
                     "void");

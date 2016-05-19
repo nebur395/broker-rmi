@@ -24,12 +24,22 @@ public class Servidor {
 
     public String getIP() {
 		int index = host_remoto_IP_port.indexOf(":");
-        return host_remoto_IP_port.substring(0, index);
+		if(index != -1){
+			return host_remoto_IP_port.substring(0, index);
+		}
+        else{
+			return host_remoto_IP_port;
+		}
     }
     
     public String getPort() {
 		int index = host_remoto_IP_port.indexOf(":");
-		return host_remoto_IP_port.substring(index+1);
+		if(index != -1){
+			return host_remoto_IP_port.substring(index+1);
+		}
+		else{
+			return host_remoto_IP_port;
+		}
 	}
 
     public ArrayList<Servicio> getServicios() {

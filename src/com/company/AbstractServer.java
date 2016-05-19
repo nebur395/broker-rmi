@@ -20,8 +20,13 @@ public abstract class AbstractServer implements ServerInterface{
 				method.invoke(this, parametros);
 				return "";
 			}
-			else if(retorno.equals("String []")){
-				return (method.invoke(this, parametros)).toString();
+			else if(retorno.equals("String[]")){
+				String [] lista = (String [])method.invoke(this, parametros);
+				String respuesta = "";
+				for(String s:lista){
+					respuesta+=s +"\n";
+				}
+				return respuesta;
 			}
 			else{
 				return (String)method.invoke(this, parametros);
@@ -42,9 +47,11 @@ public abstract class AbstractServer implements ServerInterface{
 	protected Class[] getClassArray(String [] param){
 		Class [] array = new Class[param.length];
 		try{
-			for(int i=0;param.length<i;i++){
+			for(int i=0;i<param.length;i++){
 				int index = param[i].indexOf(" ");
-				array[i] = Class.forName(param[i].substring(0, index));
+				if((param[i].substring(0, index)).equals("String")){
+					array[i] = Class.forName("java.lang.String");
+				}
 			}
 		}
 		catch (ClassNotFoundException e){

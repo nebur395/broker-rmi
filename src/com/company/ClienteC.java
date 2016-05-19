@@ -44,14 +44,19 @@ public class ClienteC {
                 } else{
                     if (servicioEscogido.contains("insertar_libro")) {
                         System.out.println("Introduzca el parámetro: ");
-                        String [] parametros = {teclado.next()};
-                        brokerInterface.ejecutar_servicio("insertar_libro",parametros);
+                        teclado.nextLine();
+                        String [] parametros = {teclado.nextLine()};
+						brokerInterface.ejecutar_servicio("insertar_libro",parametros);
+						
                     } else {
                         int i = servicioEscogido.indexOf(" ");
                         int i2 = servicioEscogido.indexOf("(");
-                        String servicio = servicioEscogido.substring(i, i2);
+                        String servicio = servicioEscogido.substring(i+1, i2);
                         System.out.println("LOG1: " + servicio);
                         String respuesta = brokerInterface.ejecutar_servicio(servicio,new String[0]);
+                        if(respuesta.equals("")){
+							System.out.println("Pues se ve que es vacío");
+						}
                         System.out.println(respuesta);
                     }
                 }
