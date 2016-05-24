@@ -37,11 +37,11 @@ public class ClienteC {
             boolean parar = false;
             while (!parar & teclado.hasNextInt()) {
                 int opcionEscogida = teclado.nextInt();
-                String servicioEscogido = lista_servicios.get(opcionEscogida - 1);
                 if (opcionEscogida == 5) {
                     parar = true;
                     teclado.close();
-                } else{
+                } else {
+					String servicioEscogido = lista_servicios.get(opcionEscogida - 1);
                     if (servicioEscogido.contains("insertar_libro")) {
                         System.out.println("Introduzca el parámetro: ");
                         teclado.nextLine();

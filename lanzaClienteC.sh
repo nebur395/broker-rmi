@@ -1,2 +1,1 @@
-java -classpath /home/inigo/Documentos/AS/broker-rmi/src com.company.ClienteC localhost 
-
+java -classpath /home/inigo/Documentos/AS/broker-rmi/src com.company.ClienteC

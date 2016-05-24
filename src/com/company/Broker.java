@@ -102,7 +102,8 @@ public class Broker implements BrokerInterface {
 
     public static void main (String [] args) {
         try {
-		            //Se crea un stub y posteriormente se introduce al registro
+			System.setProperty("java.rmi.server.hostname", "10.1.21.13");
+		    //Se crea un stub y posteriormente se introduce al registro
             BrokerInterface stub = (BrokerInterface) UnicastRemoteObject.exportObject(new
                     Broker(), 0);
             Registry registry = null;       

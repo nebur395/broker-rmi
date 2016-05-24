@@ -20,7 +20,7 @@ public class ServerA extends AbstractServer {
 	
 	public static final int port = 1099;
     private static String ipRegistro; //IP del host del registro RMI
-    private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
+    private static final String ipBroker = "10.1.31.89"; //IP del broker, se sabe antes de compilarse
 
     /**
      *	Metodo constructor de la clase que asigna la IP de registro
@@ -49,6 +49,7 @@ public class ServerA extends AbstractServer {
 
     public static void main (String [] args) {
         try {
+			System.setProperty("java.rmi.server.hostname", "10.1.21.13");
             //Se crea un stub y posteriormente se introduce al registro
             ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(new
                     ServerA(args[0]), 0);
