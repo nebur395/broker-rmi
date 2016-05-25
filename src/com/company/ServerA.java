@@ -49,7 +49,7 @@ public class ServerA extends AbstractServer {
 
     public static void main (String [] args) {
         try {
-			System.setProperty("java.rmi.server.hostname", "10.1.21.13");
+			System.setProperty("java.rmi.server.hostname", ipRegistro);
             //Se crea un stub y posteriormente se introduce al registro
             ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(new
                     ServerA(args[0]), 0);
