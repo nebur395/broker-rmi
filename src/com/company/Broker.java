@@ -17,8 +17,8 @@ import java.util.Iterator;
 
 public class Broker implements BrokerInterface {
 	public static final int port = 1099;
-    ArrayList<Servidor> servidores = new ArrayList<Servidor>();
-    public static String ip; 
+    ArrayList<Servidor> servidores = new ArrayList<Servidor>(); 
+    private static String ip;
 
     /**
      * Metodo constructor de la clase que asigna la IP de registro
@@ -104,10 +104,10 @@ public class Broker implements BrokerInterface {
 
     public static void main (String [] args) {
         try {
+			Broker bro = new Broker(args[0]);
 			System.setProperty("java.rmi.server.hostname", ip);
 		    //Se crea un stub y posteriormente se introduce al registro
-            BrokerInterface stub = (BrokerInterface) UnicastRemoteObject.exportObject(new
-                    Broker(args[0]), 0);
+            BrokerInterface stub = (BrokerInterface) UnicastRemoteObject.exportObject(bro, 0);
             Registry registry = null;       
 			try{
 				registry = LocateRegistry.createRegistry(port);

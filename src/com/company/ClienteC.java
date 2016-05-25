@@ -35,7 +35,7 @@ public class ClienteC {
             System.out.println(iterServ + ". Finalizar programa");
             Scanner teclado = new Scanner(System.in);
             boolean parar = false;
-            while (!parar & teclado.hasNextInt()) {
+            while (!parar && teclado.hasNextInt()) {
                 int opcionEscogida = teclado.nextInt();
                 if (opcionEscogida == 5) {
                     parar = true;

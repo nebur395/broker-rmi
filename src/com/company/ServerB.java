@@ -19,7 +19,7 @@ public class ServerB extends AbstractServer {
 	public static final int port = 1099;
     private static String ipRegistro = ""; //IP del host del registro RMI
     private ArrayList<String> listaLibros = new ArrayList<String>();
-    private static final String ipBroker = "10.1.31.89"; //IP del broker, se sabe antes de compilarse
+    private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
     /**
      * Metodo constructor de la clase que asigna la IP de registro
@@ -46,10 +46,10 @@ public class ServerB extends AbstractServer {
 
     public static void main (String [] args) {
         try {
+			ServerB server = new ServerB(args[0]);
 			System.setProperty("java.rmi.server.hostname", ipRegistro);
             //Se crea un stub y posteriormente se introduce al registro
-            ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(new
-                    ServerB(args[0]), 0);
+            ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(server, 0);
             Registry registry = null;       
 			try{
 				registry = LocateRegistry.createRegistry(port);
