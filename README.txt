@@ -10,7 +10,7 @@ los procesos "java" y matarlos con el comando "kill".
 descargado el proyecto actualmente (cambiar la ruta previa al directorio "broker-rmi").
 
 NOTA: Actualmente el proyecto se encuentra configurado para funcionar en local. Si se quiere lanzar en local
-para comprobar su funcionamiento, sigue los pasos 8 a 11. Si se quiere lanzar en distribuido, seguir todos
+para comprobar su funcionamiento, sigue los pasos 9 a 12. Si se quiere lanzar en distribuido, seguir todos
 los pasos que se muestran a continuación.
 
 3º - Determinar la IP de la máquina donde se va a lanzar el Broker. 
@@ -26,19 +26,27 @@ que esos 3 componentes han de conocer la localización del Broker ANTES de compi
 7º - Modificar el parámetro "localhost" de los srcripts "lanzaServerA.sh" y "lanzaServerB.sh" cambiándolo por la IP correspondiente
 a la(s) máquina(s) donde se vaya a lanzar cada uno.
 
-8º - Ejecutar en primer lugar el script lanzaBroker.sh. Se mostrará un mensaje que dirá "Broker registrado".
+8º - Recompila los fuentes modificados (o todos) con "javac" y los ficheros a compilar.
 
-9º - Ejecutar el script lanzaServerA.sh. Esperar hasta que se muestren los mensajes: 
+9º - Ejecutar en primer lugar el script lanzaBroker.sh. Se mostrará un mensaje que dirá "Broker registrado".
+
+10º - Ejecutar el script lanzaServerA.sh. Esperar hasta que se muestren los mensajes: 
 "ServerA registrado en registro RMI"
 "ServerA registrado en Broker"
 "Servicios de ServerA registrados en Broker"
 
-10º - Ejecutar el script lanzaServerB.sh. Esperar hasta que se muestren los mensajes: 
+11º - Ejecutar el script lanzaServerB.sh. Esperar hasta que se muestren los mensajes: 
 "ServerB registrado en registro RMI"
 "ServerB registrado en Broker"
 "Servicios de ServerB registrados en Broker"
 
-11º - Ejecutar el script lanzaClienteC.sh. 
+12º - Ejecutar el script lanzaClienteC.sh. 
 
 En este punto ya estará todo el proyecto montado y el cliente podrá hacer uso de los servicios listados.
 
+Posibles errores al ejecutar:
+
+- AlreadyBoundedException: El objeto que estás intentando registrar en el registro RMI ya existe. Ejecuta "ps", busca un
+proceso "java" y mátalo con "kill". Si no aparece nada con "ps", ejecuta "ps -A", busca un proceso "java" y mátalo.
+
+- ConnectException (connection refused): Alguna de las configuraciones realizadas con las IPs no es correcta. Asegúrate de seguir los pasos 3 a 8 para configurar el despliegue en distribuido.
