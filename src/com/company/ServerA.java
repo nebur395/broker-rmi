@@ -3,7 +3,8 @@ package com.company;
 /*
  * AUTORES: Rubén Moreno Jimeno 680882 e Iñigo Gascón Royo 685215
  * FICHERO: ServerA.java
- * DESCRIPCIÓN:
+ * DESCRIPCIÓN: Servidor que ofrece los métodos dar_hora y dar_fecha
+ * a través del bróker, registrándose previamente en el registro RMI.
  */
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat;
 
 public class ServerA extends AbstractServer {
 	
-	public static final int port = 1099;
+	public static final int port = 1099; //Puerto por defecto de RMI
     private static String ipRegistro; //IP del host del registro RMI
     private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
@@ -30,7 +31,8 @@ public class ServerA extends AbstractServer {
     }
 
     /**
-     *
+     * Devuelve la hora actual del sistema donde se ejecuta el servidor.
+     * @return String con la hora actual del sistema.
      */
     public String dar_hora() {
         DateFormat dateF = new SimpleDateFormat("HH:mm:ss");
@@ -39,21 +41,30 @@ public class ServerA extends AbstractServer {
     }
 
     /**
-     *
+     * Devuelve la fecha actual del sistema donde se ejecuta el servidor.
+     * @return String con la fecha actual del sistema.
      */
     public String dar_fecha() {
         DateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		return dateF.format(date);
     }
-
+	
+	/**
+	 * Método main del servidor. Crea un stub del servidor, crea o localiza
+	 * el registro de RMI y enalaza el stub en el registro. A continuación
+	 * obtiene el registro donde se encuentra el bróker y obtiene la interfaz
+	 * del bróker. Finalmente se registra en el bróker y registra también sus
+	 * servicios.
+	 */ 
     public static void main (String [] args) {
         try {
 			ServerA server = new ServerA(args[0]);
 			System.setProperty("java.rmi.server.hostname", ipRegistro);
             //Se crea un stub y posteriormente se introduce al registro
             ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(server, 0);
-            Registry registry = null;       
+            Registry registry = null;    
+            //Intenta crear un nuevo registro o lo localiza si ya existe uno.    
 			try{
 				registry = LocateRegistry.createRegistry(port);
 			}

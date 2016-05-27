@@ -2,8 +2,10 @@ package com.company;
 
 /*
  * AUTORES: Rubén Moreno Jimeno 680882 e Iñigo Gascón Royo 685215
- * FICHERO: ServerA.java
- * DESCRIPCIÓN:
+ * FICHERO: ClienteC.java
+ * DESCRIPCIÓN: Cliente que accede al bróker para obtener una lista
+ * de los servicios que ofrece y ejecuta todos los servicios que desea
+ * hasta que desee finalizar.
  */
 
 import java.net.SocketPermission;
@@ -19,6 +21,15 @@ public class ClienteC {
 
     private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
+	/**
+	 * Método Main del cliente. Obtiene el registro donde se encuentra el 
+	 * bróker y a continuación obtiene la interfaz del bróker. Pide una lista
+	 * de los servicios disponibles al bróker y la muestra por pantalla. Lee el
+	 * número introducido por el usuario, referente a uno de los servicios 
+	 * listados y pide ejecutar ese método al bróker. Finalmente muestra el 
+	 * resultado de la ejecución del método solicitado. Repite el proceso hasta
+	 * que se solicite finalizar.
+	 */ 
     public static void main(String[] args) {
         try {
             // Se coge el objeto remoto del broker

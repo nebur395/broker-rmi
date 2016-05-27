@@ -3,7 +3,8 @@ package com.company;
 /*
  * AUTORES: Rubén Moreno Jimeno 680882 e Iñigo Gascón Royo 685215
  * FICHERO: ServerB.java
- * DESCRIPCIÓN:
+ * DESCRIPCIÓN: Servidor que ofrece los métodos lista_libros e insertar_libro
+ * a través del bróker, registrándose previamente en el registro RMI.
  */
 
 import java.rmi.AlreadyBoundException;
@@ -16,8 +17,9 @@ import java.util.ArrayList;
 
 public class ServerB extends AbstractServer {
 	
-	public static final int port = 1099;
+	public static final int port = 1099; //Puerto por defecto de RMI
     private static String ipRegistro = ""; //IP del host del registro RMI
+    //ArrayList con los libros introducidos en el servidor.
     private ArrayList<String> listaLibros = new ArrayList<String>();
     private static final String ipBroker = "localhost"; //IP del broker, se sabe antes de compilarse
 
@@ -29,7 +31,8 @@ public class ServerB extends AbstractServer {
     }
 
     /**
-     *
+     * Devuelve un array con los libros introducidos en el servidor.
+     * @return Array de Strings con los libros introducidos en el servidor.
      */
     public String[] listar_libros() {
         String[] array = new String[listaLibros.size()];
@@ -37,13 +40,22 @@ public class ServerB extends AbstractServer {
     }
 
     /**
-     *
+     * Método que, dado el String con el nombre de un libro, lo introduce
+     * en el servidor para almacenarlo.
+     * @param libro - Nombre del libro a introducir.
      */
     public void insertar_libro(String libro) {
         listaLibros.add(libro);
         System.out.printf("Libro '%s' introducido%n", libro);
     }
-
+	
+	/**
+	 * Método main del servidor. Crea un stub del servidor, crea o localiza
+	 * el registro de RMI y enalaza el stub en el registro. A continuación
+	 * obtiene el registro donde se encuentra el bróker y obtiene la interfaz
+	 * del bróker. Finalmente se registra en el bróker y registra también sus
+	 * servicios.
+	 */ 
     public static void main (String [] args) {
         try {
 			ServerB server = new ServerB(args[0]);
